@@ -1,15 +1,14 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var promptSync = require("prompt-sync");
-var prompt = promptSync({ sigint: true });
-var running = true;
+import promptSync from "prompt-sync";
+const prompt = promptSync({ sigint: true });
+let running = true;
+// let menuShown: boolean = false;
 console.log("Enter #111# to show the menu : ");
 while (running) {
-    var ask = prompt("> ");
+    const ask = prompt("> ");
     switch (ask) {
         case "#111#":
             console.log("Welcome to the menu");
-            console.log("Enter \"exit\" to quit");
+            console.log(`Enter "exit" to quit`);
             break;
         case "exit":
             console.log("Good Bye");

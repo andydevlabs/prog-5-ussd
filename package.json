@@ -1,5 +1,12 @@
 {
   "dependencies": {
     "prompt-sync": "^4.2.0"
-  }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "eslint": "^9.26.0",
+    "globals": "^16.1.0",
+    "typescript-eslint": "^8.32.1"
+  },
+  "type": "module"
 }
