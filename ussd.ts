@@ -3,7 +3,7 @@ import promptSync from "prompt-sync";
 const prompt = promptSync({ sigint: true });
 
 let running: boolean = true;
-let menuShown: boolean = false;
+// let menuShown: boolean = false;
 
 console.log("Enter #111# to show the menu : ");
 while (running) {
