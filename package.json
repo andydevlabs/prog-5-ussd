@@ -8,5 +8,22 @@
     "globals": "^16.1.0",
     "typescript-eslint": "^8.32.1"
   },
-  "type": "module"
+  "type": "module",
+  "name": "prog-5-ussd",
+  "version": "1.0.0",
+  "main": "ussd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andydevlabs/prog-5-ussd.git"
+  },
+  "author": "andydevlabs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andydevlabs/prog-5-ussd/issues"
+  },
+  "homepage": "https://github.com/andydevlabs/prog-5-ussd#readme",
+  "description": ""
 }
