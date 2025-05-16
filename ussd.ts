@@ -40,10 +40,21 @@ const mainMenuOne: Menu[] = [
     new Menu("-----", "-----"),
 ];
 
+const mainMenuTwo: Menu[] = [
+    new Menu("-----", "-----"),
+    new Menu(1, "Sans numero"),
+    new Menu(2, "MVola Epargne"),
+    new Menu(3, "Rembourser une Avance"),
+    new Menu(4, "Repertoire Mvola"),
+    new Menu("**", "Menu Principal"),
+    new Menu("#", "Quitter l'application"),
+    new Menu("-----", "-----"),
+];
+
 let isRunning: boolean = true;
 let currentMenu: string = "main";
 
-function switchDefaultText(): void {
+function showTextInDisplayText(): void {
     console.log("Erreur, verifiez votre choix");
 }
 
@@ -73,14 +84,12 @@ while (isRunning) {
                 isRunning = false;
                 break;
             default:
-                switchDefaultText();
-                break;
+                showTextInDisplayText();
         }
     } else if (currentMenu === "nextMainMenu") {
         switch (ask) {
             case "2":
-                console.log(nextMainMenu[0].description);
-                break;
+                showMenu(mainMenuTwo, "mainMenuTwo")
                 break;
             case "0":
                 showMenu(mainMenu, "mainMenu");
@@ -93,7 +102,7 @@ while (isRunning) {
                 isRunning = false;
                 break;
             default:
-                break;
+                showTextInDisplayText();
         }
     } else if (currentMenu === "mainMenuOne") {
         function textToDisplayJustForthis(x: number): void {
@@ -123,8 +132,36 @@ while (isRunning) {
                 isRunning = false;
                 break;
             default:
-                switchDefaultText();
+                showTextInDisplayText();
+        }
+    } else if (currentMenu === "mainMenuTwo"){
+        function textToDisplayJustForthis(x: number): void {
+            const text: string = `vous avez choisis : ${mainMenuTwo[x].description}`;
+            console.log(text);
+            showMenu(mainMenuTwo, "mainMenuTwo");
+        }
+        switch (ask) {
+            case "1":
+                textToDisplayJustForthis(1);
                 break;
+            case "2":
+                textToDisplayJustForthis(2);
+                break;
+            case "3":
+                textToDisplayJustForthis(3);
+                break;
+            case "4":
+                textToDisplayJustForthis(4);
+                break;
+            case "**":
+                showMenu(mainMenu, "mainMenu");
+                break;
+            case "#":
+                console.log("Merci d'avoir utiliser YAS");
+                isRunning = false;
+                break;
+            default:
+                showTextInDisplayText();
         }
     }
 }
