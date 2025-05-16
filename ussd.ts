@@ -1,23 +1,23 @@
 import promptSync from "prompt-sync";
 
-const prompt = promptSync({ sigint: true });
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+const prompt = promptSync({ sigint: true }) as (question?: string) => string;
 
-let running: boolean = true;
-let menuShown: boolean = false;
+let isRunning: boolean = true;
 
 console.log("Enter #111# to show the menu : ");
-while (running) {
+while (isRunning) {
+
     const ask = prompt("> ");
     switch (ask) {
         case "#111#":
             console.log("Welcome to the menu");
             console.log(`Enter "exit" to quit`);
-
             break;
 
         case "exit":
             console.log("Good Bye");
-            running = false;
+            isRunning = false;
             break;
 
         default:

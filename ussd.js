@@ -1,9 +1,9 @@
 import promptSync from "prompt-sync";
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const prompt = promptSync({ sigint: true });
-let running = true;
-let menuShown = false;
+let isRunning = true;
 console.log("Enter #111# to show the menu : ");
-while (running) {
+while (isRunning) {
     const ask = prompt("> ");
     switch (ask) {
         case "#111#":
@@ -12,7 +12,7 @@ while (running) {
             break;
         case "exit":
             console.log("Good Bye");
-            running = false;
+            isRunning = false;
             break;
         default:
             console.log("Wrong, actually only #111# works");
