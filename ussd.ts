@@ -12,57 +12,61 @@ class Menu {
     }
 }
 
-let isRunning: boolean = true;
-let currentMenu: string = "main";
-
-const menuHistory: string[] = [];
-
 const mainMenu: Menu[] = [
+    new Menu("-----", "-----"),
     new Menu(1, "Acheter Credit ou Offre Yas"),
-    new Menu(2, "Transfert argent"),
-    new Menu(3, "Mvola Credit ou Epargne"),
-    new Menu(4, "Retrait d'argent"),
     new Menu("00", "Page suivante"),
-    new Menu("#", "Quitter")
+    new Menu("#", "Quitter l'application"),
+    new Menu("-----", "-----"),
 ];
 
 const nextMainMenu: Menu[] = [
-    new Menu(6, "Acheter Credit ou Offre Yas"),
-    new Menu(7, "Transfert argent"),
-    new Menu(8, "Mvola Credit ou Epargne"),
+    new Menu("-----", "-----"),
+    new Menu(2, "Transfert argent"),
     new Menu(0, "Page precedente"),
     new Menu("**", "Menu Principal"),
-    new Menu("#", "Quiter"),
+    new Menu("#", "Quitter l'application"),
+    new Menu("-----", "-----"),
 ];
 
-const mainMenuOne: Menu[] = [new Menu(1, "Test 1"), new Menu(2, "Test 2")];
+const mainMenuOne: Menu[] = [
+    new Menu("-----", "-----"),
+    new Menu(1, "Credit pour mon numero"),
+    new Menu(2, "Credit pour autre numero"),
+    new Menu(3, "Offre pour mon numero"),
+    new Menu(4, "Offre pour autre numero"),
+    new Menu("**", "Menu Principal"),
+    new Menu("#", "Quitter l'application"),
+    new Menu("-----", "-----"),
+];
+
+let isRunning: boolean = true;
+let currentMenu: string = "main";
 
 function switchDefaultText(): void {
     console.log("Erreur, verifiez votre choix");
 }
 
-function displayMenu(menuToDisplay: Menu[], menuString: string): void{
+function showMenu(menuToDisplay: Menu[], menuString: string): void {
     menuToDisplay.forEach((m) => console.log(`${m.id} - ${m.description}`));
     currentMenu = menuString;
 }
 
-displayMenu(mainMenu, "main");
+showMenu(mainMenu, "mainMenu");
 
 while (isRunning) {
     const ask = prompt("> ");
 
-    if (currentMenu === "main") {
+    if (currentMenu === "mainMenu") {
         switch (ask) {
             case "1":
-                displayMenu(mainMenuOne, "menu1");
+                showMenu(mainMenuOne, "mainMenuOne");
                 break;
             case "00":
-                displayMenu(nextMainMenu, "menu000");
+                showMenu(nextMainMenu, "nextMainMenu");
                 break;
             case "**":
-                while (menuHistory.length > 0)
-                    menuHistory.splice(0, menuHistory.length);
-                displayMenu(mainMenu, "main");
+                showMenu(mainMenu, "mainMenu");
                 break;
             case "#":
                 console.log("Merci d'avoir utiliser YAS");
@@ -72,21 +76,47 @@ while (isRunning) {
                 switchDefaultText();
                 break;
         }
-    } else if (currentMenu === "second") {
+    } else if (currentMenu === "nextMainMenu") {
         switch (ask) {
-            case "1":
-                console.log("You selected option 1 from second menu");
+            case "2":
+                console.log(nextMainMenu[0].description);
+                break;
                 break;
             case "0":
-                console.log("Going back to previous menu");
-                break;
-            case "00":
-                console.log("Going to next menu");
+                showMenu(mainMenu, "mainMenu");
                 break;
             case "**":
-                while (menuHistory.length > 0)
-                    menuHistory.splice(0, menuHistory.length);
-                displayMenu(mainMenu, "main");
+                showMenu(mainMenu, "mainMenu");
+                break;
+            case "#":
+                console.log("Merci d'avoir utiliser YAS");
+                isRunning = false;
+                break;
+            default:
+                break;
+        }
+    } else if (currentMenu === "mainMenuOne") {
+        function textToDisplayJustForthis(x: number): void {
+            const text: string = `vous avez choisis : ${mainMenuOne[x].description}`
+            console.log(text);
+            showMenu(mainMenuOne, "mainMenuOne");
+        }
+
+        switch (ask) {
+            case "1":
+                textToDisplayJustForthis(1);
+                break;
+            case "2":
+                textToDisplayJustForthis(2);
+                break;
+            case "3":
+                textToDisplayJustForthis(3);
+                break;
+            case "4":
+                textToDisplayJustForthis(4);
+                break;
+            case "**":
+                showMenu(mainMenu, "mainMenu");
                 break;
             case "#":
                 console.log("Merci d'avoir utiliser YAS");
