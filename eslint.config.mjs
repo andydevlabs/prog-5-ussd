@@ -27,6 +27,10 @@ export default tseslint.config(
                     format: ["camelCase"],
                 },
                 {
+                    selector: "function",
+                    format: ["camelCase"]
+                  },
+                {
                     selector: "variable",
                     types: ["boolean"],
                     format: ["PascalCase"],
