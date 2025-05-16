@@ -1,71 +1,55 @@
 import promptSync from "prompt-sync";
-// class MainMenu implements Menu {
-//     id: number;
-//     description: string;
-//     constructor(id: number, description: string) {
-//         this.id = id;
-//         this.description = description;
-//     }
-// }
-// class NextMenu implements Menu {
-//     id: number;
-//     description: string;
-//     constructor(id: number, description: string) {
-//         this.id = id;
-//         this.description = description;
-//     }
-// }
-// class PreviousMenu implements Menu {
-//     id: number;
-//     description: string;
-//     constructor(id: number, description: string) {
-//         this.id = id;
-//         this.description = description;
-//     }
-// }
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+const prompt = promptSync({ sigint: true });
 class Menu {
     constructor(id, description) {
         this.id = id;
         this.description = description;
     }
 }
-const mainMenu = [
-    new Menu(1, "Acheter Credit ou Offre Yas"),
-    new Menu(2, "Transfert argent"),
-];
-const secondeMenu = [new Menu(1, "Test 1"), new Menu(2, "Test 2")];
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-const prompt = promptSync({ sigint: true });
 let isRunning = true;
 let currentMenu = "main";
 const menuHistory = [];
-function showMainMenu() {
-    console.log("MVola Menu");
-    mainMenu.forEach((m) => {
-        console.log(`${m.id} - ${m.description}`);
-    });
-    currentMenu = "main";
+const mainMenu = [
+    new Menu(1, "Acheter Credit ou Offre Yas"),
+    new Menu(2, "Transfert argent"),
+    new Menu(3, "Mvola Credit ou Epargne"),
+    new Menu(4, "Retrait d'argent"),
+    new Menu("00", "Page suivante"),
+    new Menu("exit", "Menu principal")
+];
+const nextMainMenu = [
+    new Menu(6, "Acheter Credit ou Offre Yas"),
+    new Menu(7, "Transfert argent"),
+    new Menu(8, "Mvola Credit ou Epargne"),
+    new Menu(0, "Page precedente"),
+    new Menu("exit", "Menu principal"),
+];
+const secondeMenu = [new Menu(1, "Test 1"), new Menu(2, "Test 2")];
+function switchDefaultText() {
+    console.log("Erreur, verifiez votre choix");
 }
-function showSecondMenu() {
-    secondeMenu.forEach((m) => {
-        console.log(`${m.id} - ${m.description}`);
-    });
-    currentMenu = "second";
+function displayMenu(menuToDisplay, menuString) {
+    menuToDisplay.forEach((m) => console.log(`${m.id} - ${m.description}`));
+    currentMenu = menuString;
 }
-showMainMenu();
+displayMenu(mainMenu, "main");
 while (isRunning) {
     const ask = prompt("> ");
     if (currentMenu === "main") {
         switch (ask) {
             case "1":
-                showSecondMenu();
+                displayMenu(secondeMenu, "menu1");
+                break;
+            case "00":
+                displayMenu(nextMainMenu, "menu000");
                 break;
             case "exit":
-                console.log("Good Bye");
+                console.log("Merci d'avoir utiliser Yas");
                 isRunning = false;
                 break;
             default:
-                console.log("Unknown, please try again");
+                switchDefaultText();
                 break;
         }
     }
@@ -83,14 +67,14 @@ while (isRunning) {
             case "**":
                 while (menuHistory.length > 0)
                     menuHistory.splice(0, menuHistory.length);
-                showMainMenu();
+                displayMenu(mainMenu, "main");
                 break;
             case "exit":
                 console.log("See you!");
                 isRunning = false;
                 break;
             default:
-                console.log("Unknown, please try again");
+                switchDefaultText();
                 break;
         }
     }
